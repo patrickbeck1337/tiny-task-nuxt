@@ -41,25 +41,26 @@
 </template>
 
 <script>
-  import uuid from 'uuid';
-
   export default {
+    computed: {
+      tasks () {
+        return this.$store.state.tasks.list;
+      }
+    },
     data() {
       return {
         newTask: '',
-        tasks: [],
         icon: 'assignment',
         iconClass: 'blue white--text'
       };
     },
     methods: {
       submitForm() {
-        this.tasks.push({id: uuid(), name: this.newTask});
+        this.$store.commit('tasks/add', this.newTask);
         this.newTask='';
       },
       deleteTask(taskToBeRemoved) {
-        const index = this.tasks.findIndex(task => task.id === taskToBeRemoved.id);
-        this.tasks.splice(index,1);
+        this.$store.commit('tasks/remove', taskToBeRemoved)
       }
     }
   };
