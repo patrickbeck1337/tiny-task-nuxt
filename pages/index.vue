@@ -15,7 +15,7 @@
         ></v-text-field>
       </v-card-text>
     </v-form>
-    <v-divider class="mx-4"></v-divider>
+    <v-divider v-if="tasks.length !== 0" class="mx-4"></v-divider>
     <v-list two-line subheader>
       <v-list-item
         v-for="task in tasks"
@@ -32,7 +32,7 @@
           <v-list-item-title v-text="task.name"></v-list-item-title>
           <v-list-item-subtitle v-text="task.id"></v-list-item-subtitle>
         </v-list-item-content>
-        <v-btn text icon>
+        <v-btn text icon @click="deleteTask(task)">
           <v-icon>delete</v-icon>
         </v-btn>
       </v-list-item>
@@ -47,7 +47,7 @@
     data() {
       return {
         newTask: '',
-        tasks: [{id: uuid(), name: 'Buy a house'}, {id: uuid(), name: 'Buy a book'}],
+        tasks: [],
         icon: 'assignment',
         iconClass: 'blue white--text'
       };
@@ -55,6 +55,11 @@
     methods: {
       submitForm() {
         this.tasks.push({id: uuid(), name: this.newTask});
+        this.newTask='';
+      },
+      deleteTask(taskToBeRemoved) {
+        const index = this.tasks.findIndex(task => task.id === taskToBeRemoved.id);
+        this.tasks.splice(index,1);
       }
     }
   };

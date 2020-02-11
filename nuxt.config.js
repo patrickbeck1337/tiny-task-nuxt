@@ -72,7 +72,11 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
+    extend (config, isClient) {
+      // Extend only webpack config for client-bundle
+      if (isClient) {
+        config.devtool = 'source-map'
+      }
     }
   }
 }
