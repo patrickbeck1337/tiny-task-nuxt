@@ -17,6 +17,7 @@ $ yarn start
 
 # generate static project
 $ yarn generate
+
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+Try it out [here](https://shrouded-brook-40528.herokuapp.com)
